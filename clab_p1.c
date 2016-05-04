@@ -19,11 +19,25 @@ void printStack(StackNodePtr topPtr);
 
 
 int main(void){
-  int infixArray[10];
+ /*) int infixArray[10];
   int postfixArray[10];
   convertToPostfix(infixArray, postfixArray);
- // printStack();
-  return 0;
+  printStack(StackNodePtr);
+  return 0; */
+  struct stackNode *head = NULL;
+  int size, element;
+  int counter = 0;
+  printf("Enter the number of stack elements:");
+  scanf("%d",&size);
+ 
+  printf("--- Push elements into the linked stack ---\n");
+    while(counter<size){
+      printf("Enter a number to push into the stack:");
+      scanf("%d",&element);
+      push(head,element);
+      display(head);
+      counter++;
+    }
 }
 /*Convert the infix expression to postfix notation.*/
 void convertToPostfix( char infix[], char postfix[]){
@@ -68,27 +82,35 @@ int precedence(char operator1, char operator2){
 }
 /*Push a value on the stack.*/
 void push(StackNodePtr *topPtr, char value){
-  struct stackNode *temp = malloc(sizeOf(StackNode));
-  if (temp == NULL){console.log("temp stackNode is NULL") }
+  struct stackNode temp = malloc(sizeOf(StackNode));
+  if (topPtr == NULL){console.log("temp stackNode is NULL") }
   temp->data = value; 
   temp->nextPtr = topPtr; // temp is now connected to previous head
-  StackNodePtr = temp; // let the new temp be pointed
+  topPtr = temp; // let the new temp be pointed
 }
 /*Pop a value off the stack.*/
 char pop(StackNodePtr *topPtr){
-  struct stackNode *temp = StackNodePtr;
+  /*struct stackNode temp = StackNodePtr;
   StackNodePtr = StackNodePtr->topPtr; //Go back to previous head
   free(temp);
-  return StackNodePtr;
+  return StackNodePtr;*/
+  int i = topPtr->data;
+  topPtr = topPtr-> nextPtr; // go back to the previous head
+  return i;
 }
 
 /*Return the top value of the stack without popping the stack.*/
 char stackTop(StackNodePtr topPtr){
-
+  return topPtr->data;
 }
 /*Determine if the stack is empty.*/
 int isEmpty(StackNodePtr topPtr){
-
+  if (topPtr == NULL){
+    return 1;
+  }
+  else{
+    return -1;
+  }
 }
 /*Print the stack*/
 void printStack(StackNodePtr topPtr){
