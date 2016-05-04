@@ -25,18 +25,19 @@ int main(void){
   printStack(StackNodePtr);
   return 0; */
   struct stackNode *head = NULL;
-  int size, element;
+  int size =0;
+  int element =0;
   int counter = 0;
   printf("Enter the number of stack elements:");
   scanf("%d",&size);
  
   printf("--- Push elements into the linked stack ---\n");
     while(counter<size){
-      printf("Enter a number to push into the stack:");
+     /* printf("Enter a number to push into the stack:");
       scanf("%d",&element);
       push(head,element);
       display(head);
-      counter++;
+      counter++;*/
     }
 }
 /*Convert the infix expression to postfix notation.*/
@@ -73,7 +74,7 @@ int precedence(char operator1, char operator2){
   else if (operator1 == '^' && (operator2 == '*' || operator2 == '/' || operator2 == '%') ){
     return 1;
   }
-  else if ((operator2 == '*' || operator2 == '/' || operator2 == '%') && operator2 == '^' ){
+  else if ((operator1 == '*' || operator1 == '/' || operator1 == '%') && operator2 == '^' ){
     return -1;
   }
   else {
@@ -82,11 +83,13 @@ int precedence(char operator1, char operator2){
 }
 /*Push a value on the stack.*/
 void push(StackNodePtr *topPtr, char value){
-  struct stackNode temp = malloc(sizeOf(StackNode));
-  if (topPtr == NULL){console.log("temp stackNode is NULL") }
-  temp->data = value; 
-  temp->nextPtr = topPtr; // temp is now connected to previous head
-  topPtr = temp; // let the new temp be pointed
+  //struct stackNode temp = malloc(sizeOf(StackNode));
+  struct stackNode* tmp = (struct stackNode*)malloc(sizeof(StackNode));
+ // if (topPtr == NULL){printf("temp stackNode is NULL"); }
+  tmp->data = value; 
+  tmp->nextPtr = *topPtr; // temp is now connected to previous head
+  *topPtr = tmp; // let the new temp be pointed
+  
 }
 /*Pop a value off the stack.*/
 char pop(StackNodePtr *topPtr){
@@ -94,9 +97,9 @@ char pop(StackNodePtr *topPtr){
   StackNodePtr = StackNodePtr->topPtr; //Go back to previous head
   free(temp);
   return StackNodePtr;*/
-  int i = topPtr->data;
-  topPtr = topPtr-> nextPtr; // go back to the previous head
-  return i;
+  //int i = topPtr->data;
+  //topPtr = topPtr-> nextPtr; // go back to the previous head
+  return 1;
 }
 
 /*Return the top value of the stack without popping the stack.*/
@@ -114,7 +117,7 @@ int isEmpty(StackNodePtr topPtr){
 }
 /*Print the stack*/
 void printStack(StackNodePtr topPtr){
-  struct node *current;
+ /* struct node *current;
   current = topPtr;
   if(current!= NULL){
     printf("Stack: ");
@@ -128,4 +131,5 @@ void printStack(StackNodePtr topPtr){
     else{
       printf("The Stack is empty\n");
     }
+    */
 }
