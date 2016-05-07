@@ -31,7 +31,8 @@ int main(void){
   int counter = 0;
   printf("Enter the number of stack elements:");
   scanf("%d",&size);
- 
+//  int empty = isEmpty(head);
+//  printf ("%d", empty);
   printf("--- Push elements into the linked stack ---\n");
     while(counter<size){
       printf("Enter a number to push into the stack:");
@@ -43,7 +44,8 @@ int main(void){
       counter++;
     }
 	printStack(head);
-  char i = pop(&head);
+  //char i = pop(&head);
+  //char i = stackTop(head);
   printStack(head);
 }
 /*Convert the infix expression to postfix notation.*/
@@ -123,7 +125,8 @@ char pop(StackNodePtr *topPtr){
 
 /*Return the top value of the stack without popping the stack.*/
 char stackTop(StackNodePtr topPtr){
-  return topPtr->data;
+  char top = topPtr->data;
+  return top;
 }
 /*Determine if the stack is empty.*/
 int isEmpty(StackNodePtr topPtr){
