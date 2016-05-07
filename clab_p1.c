@@ -46,7 +46,7 @@ int main(void){
 }
 /*Convert the infix expression to postfix notation.*/
 void convertToPostfix( char infix[], char postfix[]){
-
+1
 }
 /*Determine if c is an operator.*/
 int isOperator(char c){
@@ -134,15 +134,15 @@ int isEmpty(StackNodePtr topPtr){
 }
 /*Print the stack*/
 void printStack(StackNodePtr topPtr){
-  StackNodePtr *current;
+  StackNodePtr current;
   current = topPtr;
-  if(topPtr == NULL){
+  if(current == NULL){
 		printf("Empty List");  
   }
   else{
-	while(topPtr !=NULL){
-		printf("%d\t", (*current)->data);
-		current=(*current)->nextPtr;	
+	while(current !=NULL){
+		printf("%d\t", current->data);
+		current=current->nextPtr;	
 	}  
 	printf("NULL \n");
   }
