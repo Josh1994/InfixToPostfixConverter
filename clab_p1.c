@@ -38,15 +38,17 @@ int main(void){
      //
       scanf("%d",&element);
 
-      push(&head,element);
+      push(&head,element); //&head is used because we are passing the pointer to stackNode's value
      	
       counter++;
     }
 	printStack(head);
+  char i = pop(&head);
+  printStack(head);
 }
 /*Convert the infix expression to postfix notation.*/
 void convertToPostfix( char infix[], char postfix[]){
-1
+
 }
 /*Determine if c is an operator.*/
 int isOperator(char c){
@@ -92,9 +94,9 @@ void push(StackNodePtr *topPtr, char value){
  if (*topPtr == NULL){
  	//StackNodePtr *p= malloc (sizeof(StackNode));
  	//topPtr = p;
-	printf("Hello");fflush(stdout);
-  *topPtr = malloc (sizeof(StackNode));
-  
+  *topPtr = malloc (sizeof(StackNode)); // topPtr is derefenced because StackNodePtr *topPtr is a pointer to 
+                                        // the pointer to stackNode and we want to find out the value of the pointer
+                                        // to stackNode only and create a memory space in it.
   (**topPtr).data =value;
   (**topPtr).nextPtr=NULL;
   }
@@ -110,13 +112,13 @@ void push(StackNodePtr *topPtr, char value){
 }
 /*Pop a value off the stack.*/
 char pop(StackNodePtr *topPtr){
-  /*struct stackNode temp = StackNodePtr;
-  StackNodePtr = StackNodePtr->topPtr; //Go back to previous head
+  //StackNodePtr = StackNodePtr->topPtr; //Go back to previous head
+  StackNodePtr temp = *topPtr;
+  char i = (*topPtr)->data;
+  *topPtr = (*topPtr)-> nextPtr; // go back to the previous head
   free(temp);
-  return StackNodePtr;*/
-  //int i = topPtr->data;
-  //topPtr = topPtr-> nextPtr; // go back to the previous head
-  return 1;
+ // printf("Hello");fflush(stdout); // Checker to see where the method breaks
+  return i;
 }
 
 /*Return the top value of the stack without popping the stack.*/
