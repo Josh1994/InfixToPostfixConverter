@@ -1,4 +1,5 @@
 #include <stdio.h> 
+#include <stdlib.h>
 
 struct stackNode {
 char data;
@@ -19,26 +20,29 @@ void printStack(StackNodePtr topPtr);
 
 
 int main(void){
- /*) int infixArray[10];
+ /*) int infixArray[10];  
   int postfixArray[10];
   convertToPostfix(infixArray, postfixArray);
   printStack(StackNodePtr);
   return 0; */
-  struct stackNode *head = NULL;
-  int size =0;
-  int element =0;
+  StackNodePtr head = NULL;
+  int size;
+  int element = 0;
   int counter = 0;
   printf("Enter the number of stack elements:");
   scanf("%d",&size);
  
   printf("--- Push elements into the linked stack ---\n");
     while(counter<size){
-     /* printf("Enter a number to push into the stack:");
+      printf("Enter a number to push into the stack:");
+     //
       scanf("%d",&element);
-      push(head,element);
-      display(head);
-      counter++;*/
+
+      push(&head,element);
+     	
+      counter++;
     }
+	printStack(head);
 }
 /*Convert the infix expression to postfix notation.*/
 void convertToPostfix( char infix[], char postfix[]){
@@ -83,13 +87,26 @@ int precedence(char operator1, char operator2){
 }
 /*Push a value on the stack.*/
 void push(StackNodePtr *topPtr, char value){
+
   //struct stackNode temp = malloc(sizeOf(StackNode));
-  struct stackNode* tmp = (struct stackNode*)malloc(sizeof(StackNode));
+ if (*topPtr == NULL){
+ 	//StackNodePtr *p= malloc (sizeof(StackNode));
+ 	//topPtr = p;
+	printf("Hello");fflush(stdout);
+  *topPtr = malloc (sizeof(StackNode));
+  
+  (**topPtr).data =value;
+  (**topPtr).nextPtr=NULL;
+  }
+  else{
+  StackNodePtr tmp = malloc(sizeof(StackNode));
+  //topPtr = (struct StackNode *)malloc(sizeof(StackNode));
  // if (topPtr == NULL){printf("temp stackNode is NULL"); }
   tmp->data = value; 
-  tmp->nextPtr = *topPtr; // temp is now connected to previous head
+  //tmp->nextPtr = malloc(sizeof(StackNode)); // temp is now connected to previous head
+  tmp->nextPtr = *topPtr;
   *topPtr = tmp; // let the new temp be pointed
-  
+  }
 }
 /*Pop a value off the stack.*/
 char pop(StackNodePtr *topPtr){
@@ -117,19 +134,17 @@ int isEmpty(StackNodePtr topPtr){
 }
 /*Print the stack*/
 void printStack(StackNodePtr topPtr){
- /* struct node *current;
+  StackNodePtr *current;
   current = topPtr;
-  if(current!= NULL){
-    printf("Stack: ");
-    do{
-      printf("%d ",current->data);
-      current = current->nextPtr;
-      }
-    while (current!= NULL);
-      printf("\n");
-    }
-    else{
-      printf("The Stack is empty\n");
-    }
-    */
+  if(topPtr == NULL){
+		printf("Empty List");  
+  }
+  else{
+	while(topPtr !=NULL){
+		printf("%d\t", (*current)->data);
+		current=(*current)->nextPtr;	
+	}  
+	printf("NULL \n");
+  }
+   
 }
