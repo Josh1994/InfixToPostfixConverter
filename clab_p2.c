@@ -22,8 +22,7 @@ int main(){
   printf("Print expression: ");
   gets(charArray);
   int answer = evaluatePostfixExpression(charArray);
-  printf("This is the end answer: %d\n", answer);
-
+  printf("The value of the expression is: %d\n", answer);
   return 0;
 }
 
@@ -36,8 +35,7 @@ int evaluatePostfixExpression(char *expr){
   StackNodePtr head = NULL;
   expr[strlen(expr)] = '\0'; // adds \0 to the end of expression
   for(i=0; i < strlen(expr); i++){
-    //printf("%c\n", expr[i]);
-    if(isalnum(expr[i]) ){
+   if(isalnum(expr[i]) ){
       push(&head, expr[i] - '0');
       printStack(head);
     }
@@ -47,18 +45,15 @@ int evaluatePostfixExpression(char *expr){
       opp2 = pop(&head);
       printStack(head);
       int result = calculate(opp1, opp2, expr[i]);
-      printf("This is the result %d\n", result);
       push(&head, result);
       printStack(head);
-      //printf("This is the result on calc %d\n", result);
+      answer = result;
     }
     else if(expr[i] == '\0'){
       answer = pop(&head);
-      printf("This is the answer");
       printStack(answer);
     } 
   }
-  printf("%d\n", answer);
   return answer;
 }
 
