@@ -35,10 +35,16 @@ int evaluatePostfixExpression(char *expr){
   StackNodePtr head = NULL;
   expr[strlen(expr)] = '\0'; // adds \0 to the end of expression
   for(i=0; i < strlen(expr); i++){
+  /*Push its integer value onto the stack (the integer value of a digit character is its
+    value in the computer’s character set minus the value of '0' in the computer’s
+    character set). */
    if(isalnum(expr[i]) ){
       push(&head, expr[i] - '0');
       printStack(head);
     }
+    /*Pop the two top elements of the stack into variables x and y. 
+      Calculate y operator x.
+      Push the result of the calculation onto the stack*/
     else if(expr[i] == '+' || expr[i] == '-' || expr[i]  == '*' || expr[i] == '/' || expr[i] == '%'|| expr[i] =='^'){
       opp1 = pop(&head);
       printStack(head);
@@ -49,6 +55,8 @@ int evaluatePostfixExpression(char *expr){
       printStack(head);
       answer = result;
     }
+    /*When the null character is encountered in the expression, pop the top value of the
+      stack. This is the result of the postfix expression. */
     else if(expr[i] == '\0'){
       answer = pop(&head);
       printStack(answer);

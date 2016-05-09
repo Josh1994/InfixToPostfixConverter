@@ -47,15 +47,21 @@ void convertToPostfix(char infix[],char postfix[]){
  // printf("%d\n", strlen(infix));
   infix[strlen(infix)] = ')';
   for(i=0, j=0; i<= strlen(infix); i++){
+   /* If the current character in infix is a digit, copy it to the next element of postfix. */
     if (isalnum(infix[i])){
       postfix[j] = infix[i];
       j++;
     }
+   /* If the current character in infix is a left parenthesis, push it onto the stack. */
     else if (infix[i] == '('){
       push(&head, infix[i]);
       printStack(head);
     }
     else if(isOperator(infix[i])==1){
+    /*Pop operators (if there are any) at the top of the stack while they have equal or
+      higher precedence than the current operator, and insert the popped operators in
+      postfix.
+      Push the current character in infix onto the stack*/
       while(precedence(stackTop(head), infix[i]) == 1 || precedence(stackTop(head), infix[i]) == 0){
         postfix[j]= pop(&head);
         j++;
@@ -64,6 +70,9 @@ void convertToPostfix(char infix[],char postfix[]){
       printStack(head);
     }
     else if(infix[i] == ')'){
+     /* Pop operators from the top of the stack and insert them in postfix until a left
+        parenthesis is at the top of the stack.
+        Pop (and discard) the left parenthesis from the stack. */
       while( (stackTop(head)!= '(') && isOperator(head->data) == 1){
         postfix[j] = pop (&head);
         j++;
