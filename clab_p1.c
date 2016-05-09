@@ -44,7 +44,7 @@ void convertToPostfix(char infix[],char postfix[]){
   int i;
   int j;
   push(&head,'(');
-  printf("%d\n", strlen(infix));
+ // printf("%d\n", strlen(infix));
   infix[strlen(infix)] = ')';
   for(i=0, j=0; i<= strlen(infix); i++){
     if (isalnum(infix[i])){
